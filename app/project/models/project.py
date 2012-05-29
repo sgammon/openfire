@@ -62,7 +62,7 @@ class Proposal(ndb.Model):
 
 
 ## Projects
-class Project(ndb.Model):
+class Project(polymodel.PolyModel):
 
     ''' An openfire project, also known as a `spark` :) '''
 
