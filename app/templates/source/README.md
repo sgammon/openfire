@@ -1,1 +1,1 @@
-## Template Source Readme
+## Template Source Readme for openfire.

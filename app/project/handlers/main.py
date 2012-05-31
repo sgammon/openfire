@@ -4,11 +4,15 @@ from project.handlers import WebHandler
 
 class Landing(WebHandler):
 
-    ''' Returns the age-old, enigmatic success response. '''
+    ''' openfire landing page. '''
 
     def get(self):
 
-        ''' Render the template at "app/templates/main/helloworld.html". '''
+        ''' Render landing.html or landing_noauth.html. '''
 
-        self.render('main/helloworld.html')
+        # TODO: How to determine logged in?
+        if False:
+            self.render('main/landing_noauth.html')
+        else:
+            self.render('main/landing.html')
         return
