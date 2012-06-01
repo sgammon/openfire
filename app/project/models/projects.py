@@ -97,7 +97,7 @@ class Goal(polymodel.PolyModel):
     amount = ndb.IntegerProperty('a', indexed=True, required=True)
     description = ndb.TextProperty('d', indexed=False)
     backer_count = ndb.IntegerProperty('b', indexed=True, default=0)
-    progress = ndb.IntegerProperty('pg', indexed=True, choices=xrange(0, 100), default=0)
+    progress = ndb.IntegerProperty('pg', indexed=True, choices=range(0, 100), default=0)
     met = ndb.BooleanProperty('m', indexed=True, default=False)
 
 
