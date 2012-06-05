@@ -1,18 +1,21 @@
-{% extends "core/base_web.html" %}
-
+{% extends "layout/layout_base.html" %}
 
 {% block main %}
 
-    {% block logo%}
-        LOGO
-    {% endblock %}
+    {% block masthead %}
+        <div>LOGO</div>
+    {% endblock masthead %}
 
-    {% block projects%}
-        PROJECTS
-    {% endblock %}
+    {% block content %}
 
-    {% block activity %}
-        ACTIVITY
-    {% endblock %}
+        {% block projects %}
+            <div>PROJECTS</div>
+        {% endblock projects %}
+
+        {% block activity %}
+            <div>ACTIVITY</div>
+        {% endblock activity %}
+
+    {% endblock content %}
 
 {% endblock %}

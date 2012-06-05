@@ -1,0 +1,29 @@
+{% extends "core/base_web.html" %}
+
+{% block header %}
+  <h1 id="title">openfire</h1>
+		<nav role="navigation">
+			<ul>
+				<li><a href="/">Home</a></li>
+				<li><a href="/about">About</a></li>
+				<li><a href="/projects">Project</a></li>
+				<li><a href="/propose">Propose</a></li>
+			</ul>
+		</nav>
+{% endblock %}
+
+{% block main %}
+    main.
+{% endblock main %}
+
+{% block footer %}
+    <div id='footer-content'>
+    {% block footerleft  %}
+        openfire footer left.
+    {% endblock footerleft %}
+
+    {% block footerright %}
+        openfire footer right.
+    {% endblock footerright %}
+    </div>
+{% endblock footer %}
