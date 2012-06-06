@@ -2,20 +2,30 @@
 
 {% block main %}
 
-    {% block masthead %}
-        <div>LOGO</div>
-    {% endblock masthead %}
+	<!-- Main Masthead -->
+	<div id='masthead'>
+	    {% block masthead %}
+	        <img src='https://d2ipw8y1masjpy.cloudfront.net/static/branding/openfire_transparent_optimized.png' alt='openfire!' width='600' height='173' />
+	        <h1 id="title"><span class='lightorange'>momentum for</span> <span class='darkorange'>positive disruption</span></h1>
+	    {% endblock masthead %}
+	</div><!-- #masthead -->
 
-    {% block content %}
+    <div id='content'>
+		{% block content %}
+			<section id='projects' class='cardstack' role='region'>
+		        {% block projects %}
+		        <h2>Projects</h2>
+		        <hr />
+		        {% endblock projects %}
+		    </section><!-- #projects -->
 
-        {% block projects %}
-            <div>PROJECTS</div>
-        {% endblock projects %}
-
-        {% block activity %}
-            <div>ACTIVITY</div>
-        {% endblock activity %}
-
-    {% endblock content %}
+		    <section id='activity' class='newsfeed' role='region'>
+		        {% block activity %}
+		        <h2>Activity</h2>
+		        <hr />
+		        {% endblock activity %}
+		    </section><!-- #activity -->
+		 {% endblock content %}
+	 </div><!-- #content -->
 
 {% endblock %}

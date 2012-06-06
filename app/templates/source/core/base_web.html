@@ -8,9 +8,9 @@
 
 <!-- Header -->
 <div id="header-container">
-	<header class="wrapper clearfix" role="banner">
+	<header id='superbar' class="clearfix" role="banner">
 		{% block header %}
-        <h3>header</h3>
+			{% include "snippets/superbar.html" %}
 		{% endblock %}
 	</header>
 </div>
