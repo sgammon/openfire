@@ -106,7 +106,6 @@ class Tier(polymodel.PolyModel):
 
     ''' Represents a contribution tier for an openfire project. '''
 
-    target = ndb.KeyProperty('k', indexed=True, required=True)
     contribution_type = ndb.KeyProperty('t', indexed=True, required=True)
     amount = ndb.IntegerProperty('a', indexed=True, required=True)
     description = ndb.TextProperty('d', indexed=False)
