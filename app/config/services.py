@@ -25,7 +25,7 @@ config['apptools.project.services'] = {
 
         'hmac_hash': hashlib.sha512,  # Hash algorithm to use for HMAC signatures
         'url_prefix': '/_api/rpc',  # Prefix for all service invocation URLs
-        'secret_key': 'vjvbhvb(*B(#&@G#cvbn9dnc9*BN(!*B76cv23',  # Secret key for generating HMAC signings
+        'secret_key': 'VNoibcXBx(*3&@!v1v1y2v2ob0(((hcd8hcdb8112',  # Secret key for generating HMAC signings
 
     },
 
@@ -58,10 +58,51 @@ config['apptools.project.services'] = {
             }
         },
 
+        ## BBQ API - admin stuff (shhh!)
+        'bbq': {
+			'enabled': False,
+			'service': 'openfire.services.bbq.BBQService',
+			'methods': ['grant', 'revoke', 'flush_cache', 'create_user'],
+
+			'config': {
+				'caching': 'none',
+				'security': 'private',
+				'recording': 'none'
+			}
+
+        },
+
+        ## Auth API - allows async login/logout, session management, and related stuff
+        'auth': {
+			'enabled': False,
+			'service': 'openfire.services.auth.AuthService',
+			'methods': ['login', 'logout', 'session', 'request', 'verify', 'thirdparty', 'renew', 'signup'],
+
+			'config': {
+				'caching': 'none',
+				'security': 'private',
+				'recording': 'none'
+			}
+        },
+
+        ## Content API - allows saving/retrieving of small content snippets
+        'content': {
+			'enabled': False,
+			'service': 'openfire.services.content.ContentService',
+			'methods': ['get', 'put', 'sync'],
+
+			'config': {
+				'caching': 'none',
+				'security': 'none',
+				'recording': 'none'
+			}
+        },
+
+        ## User API - allows user profiles/data and facepiles to be retrieved
         'user': {
             'enabled': True,
-            'service': 'project.services.user.UserService',
-            'methods': ['profile', 'account', 'follow', 'followers'],
+            'service': 'openfire.services.user.UserService',
+            'methods': ['profile', 'account', 'follow', 'followers', 'follow', 'followers'],
 
             'config': {
                 'caching': 'none',
@@ -70,10 +111,11 @@ config['apptools.project.services'] = {
             }
         },
 
+        ## Project API - provides structured information about openfire projects
         'project': {
             'enabled': True,
-            'service': 'project.services.projects.ProjectService',
-            'methods': ['projects', 'project'],
+            'service': 'openfire.services.projects.ProjectService',
+            'methods': ['get', 'list', 'put', 'comment', 'comments', 'post', 'posts', 'add_media', 'media', 'follow', 'followers', 'backers', 'back'],
 
             'config': {
                 'caching': 'none',
@@ -82,16 +124,30 @@ config['apptools.project.services'] = {
             }
         },
 
+        ## Proposal API - provides methods dealing with proposals for openfire projects
         'proposal': {
             'enabled': True,
-            'service': 'project.services.proposal.ProposalService',
-            'methods': ['proposals', 'proposal', 'comment', 'comments'],
+            'service': 'openfire.services.proposal.ProposalService',
+            'methods': ['get', 'list', 'put', 'comment', 'comments', 'promote', 'suspend', 'reject'],
 
             'config': {
                 'caching': 'none',
                 'security': 'none',
                 'recording': 'none'
             }
+        },
+
+        ## Realtime API - used for establishing/managing a realtime/push session
+        'realtime': {
+			'enabled': False,
+			'service': 'openfire.services.realtime.RealtimeService',
+			'methods': ['establish', 'renew', 'ping', 'manifest'],
+
+			'config': {
+				'caching': 'none',
+				'security': 'none',
+				'recording': 'none'
+			}
         }
 
     }  # End services

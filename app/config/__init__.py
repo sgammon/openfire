@@ -39,7 +39,7 @@ debug = os.environ.get('SERVER_SOFTWARE', '').startswith('Dev')
 _config['webapp2'] = {
 
     'apps_installed': [
-        'project'  # Installed projects
+        'openfire'  # Installed projects
     ],
 
 }

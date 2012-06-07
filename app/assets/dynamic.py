@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import webapp2
-from project.models import ndb
+from openfire.models import ndb
 from google.appengine.ext.ndb import blobstore
 from google.appengine.api import datastore_errors
 
