@@ -4,25 +4,86 @@
 @import _core/initializr
 
 body
-	font: 80% Verdana, sans-serif
+    font: 80% Verdana, sans-serif
 
 h1
-	font: 48pt 'Satisfy', cursive
-	width: 100%
-	text-align: center
-	padding-top: 25px
+    font: 48pt 'Satisfy', cursive
 
 p
-	margin: 15px 0
-	padding: 5px 0
+    margin: 15px 0
+    padding: 5px 0
+
+.lightorange
+    color: #ffb246
+
+.darkorange
+    color: #f57220
+
+#header-container
+    top: 0
+    left: 0
+    right: 0
+    position: absolute
+    z-index: 1000
 
 #main
-	position: absolute
-	top: 0
-	left: 0
-	bottom: 0
-	right: 0
+    position: absolute
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
+    z-index: 500
 
+    #content
+
+        section
+            width: 45%
+            padding: 10px
+            padding-top: 5px
+            margin: 20px
+            background: #eee
+            min-height: 800px
+            min-width: 100px
+            float: left
+
+    #masthead
+        background: #ddd
+        height: 270px
+        position: relative
+
+        img
+            position: absolute
+            bottom: 25%
+            left: 5%
+
+        #title
+            position: absolute
+            bottom: 0
+            left: 13%
+            font: 32pt "Satisfy", cursive
+
+
+#footer-container
+    position: fixed
+    bottom: 0
+    left: 0
+    right: 0
+    z-index: 1000
+    background: #bbb
+    padding: 10px
+
+    .left
+        float: left
+
+    .right
+        float: right
+
+
+// MediaQueries/Print/Helpers
 @import _core/helpers
 @import _core/mediaqueries
 @import _core/print
+
+
+// openfire! :)
+@import _partials/superbar

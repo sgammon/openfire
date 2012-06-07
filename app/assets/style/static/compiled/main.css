@@ -277,22 +277,18 @@ body {
  *  ALL: Orange Theme
  * =================== */
 #header-container {
-  border-bottom: 20px solid #e44d26;
+  height: 50px;
 }
 
 #footer-container, #main aside {
-  border-top: 20px solid #e44d26;
-}
-
-#header-container, #footer-container, #main aside {
-  background: #f16529;
+  border-top: 20px solid #dddddd;
 }
 
 #title {
   color: white;
 }
 #title::-moz-selection, #title::selection {
-  background: #f16529;
+  background: #eeeeee;
   color: white;
   text-shadow: none;
 }
@@ -302,9 +298,7 @@ body {
  * ============== */
 nav a {
   display: block;
-  margin-bottom: 10px;
   padding: 15px 0;
-  background: #e44d26;
   color: white;
   text-align: center;
   text-decoration: none;
@@ -320,9 +314,6 @@ nav a:hover {
 /* ==============
  *  MOBILE: Main
  * ============== */
-#main {
-  padding: 30px 0;
-}
 #main article h1 {
   font-size: 2em;
 }
@@ -342,14 +333,27 @@ body {
 
 h1 {
   font: 48pt "Satisfy", cursive;
-  width: 100%;
-  text-align: center;
-  padding-top: 25px;
 }
 
 p {
   margin: 15px 0;
   padding: 5px 0;
+}
+
+.lightorange {
+  color: #ffb246;
+}
+
+.darkorange {
+  color: #f57220;
+}
+
+#header-container {
+  top: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  z-index: 1000;
 }
 
 #main {
@@ -358,6 +362,49 @@ p {
   left: 0;
   bottom: 0;
   right: 0;
+  z-index: 500;
+}
+#main #content section {
+  width: 45%;
+  padding: 10px;
+  padding-top: 5px;
+  margin: 20px;
+  background: #eeeeee;
+  min-height: 800px;
+  min-width: 100px;
+  float: left;
+}
+#main #masthead {
+  background: #dddddd;
+  height: 270px;
+  position: relative;
+}
+#main #masthead img {
+  position: absolute;
+  bottom: 25%;
+  left: 5%;
+}
+#main #masthead #title {
+  position: absolute;
+  bottom: 0;
+  left: 13%;
+  font: 32pt "Satisfy", cursive;
+}
+
+#footer-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: #bbbbbb;
+  padding: 10px;
+}
+#footer-container .left {
+  float: left;
+}
+#footer-container .right {
+  float: right;
 }
 
 .ir {
@@ -424,10 +471,7 @@ p {
    *  INTERMEDIATE: Menu
    * ==================== */
   nav a {
-    float: left;
-    width: 27%;
     margin: 0 1.7%;
-    padding: 25px 2%;
     margin-bottom: 0;
   }
   nav li:first-child a {
@@ -451,12 +495,6 @@ p {
   /* ====================
    *  WIDE: CSS3 Effects
    * ==================== */
-  #header-container, #main aside {
-    -webkit-box-shadow: 0 5px 10px #aaaaaa;
-    -moz-box-shadow: 0 5px 10px #aaaaaa;
-    box-shadow: 0 5px 10px #aaaaaa;
-  }
-
   /* ============
    *  WIDE: Menu
    * ============ */
@@ -465,8 +503,8 @@ p {
   }
 
   nav {
-    float: right;
-    width: 38%;
+    float: left;
+    margin-left: 1%;
   }
 
   /* ============
@@ -486,8 +524,7 @@ p {
    *  Maximal Width
    * =============== */
   .wrapper {
-    width: 1026px;
-    /* 1140px - 10% for margins */
+    width: 100%;
     margin: 0 auto;
   }
 }
@@ -556,4 +593,45 @@ p {
   h2, h3 {
     page-break-after: avoid;
   }
+}
+#superbar {
+  width: 100%;
+  height: 50px;
+}
+#superbar nav {
+  position: absolute;
+  left: 110px;
+  right: 0;
+}
+#superbar nav .left {
+  float: left;
+  margin-left: 1%;
+}
+#superbar nav .left li {
+  float: left;
+}
+#superbar nav .right {
+  float: right;
+  margin-right: 1%;
+}
+#superbar nav .right li {
+  float: right;
+}
+#superbar nav ul li {
+  padding: 0 10px;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+#superbar nav ul li a {
+  color: #ffb246;
+}
+#superbar nav ul li a:hover {
+  text-decoration: none !important;
+}
+#superbar nav ul li:hover {
+  background: #f57220 !important;
+}
+#superbar nav ul li:hover a {
+  color: white !important;
+  text-decoration: none !important;
 }

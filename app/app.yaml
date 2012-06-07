@@ -1,5 +1,5 @@
-application: apptools-powered
-version: beta
+application: open-fire-staging
+version: develop
 runtime: python27
 api_version: 1
 threadsafe: yes
@@ -61,16 +61,20 @@ derived_file_type:
 #### ===== Custom Admin Pages
 admin_console:
   pages:
-  - name: Developer's Console
-    url: /_app/dev
-  - name: Management Console
-    url: /_app/manage
-  - name: Map/Reduce
-    url: /_ah/mapreduce/
-  - name: Pipelines
-    url: /_ah/pipeline/status
+  - name: L9 Dashboard
+    url: /go/admin/dashboard
+  - name: JIRA
+    url: /go/admin/jira
+  - name: Confluence
+    url: /go/admin/wiki
+  - name: Crowd (SSO)
+    url: /go/admin/sso
+  - name: Watchdog
+    url: /go/admin/watchdog
   - name: AppStats
     url: /_ah/stats
+  - name: AWS
+    url: /go/admin/aws
 
 
 #### ===== Error Handlers

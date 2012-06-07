@@ -56,6 +56,42 @@ config['apptools.project.services'] = {
                 'security': 'none',
                 'recording': 'none'
             }
+        },
+
+        'user': {
+            'enabled': True,
+            'service': 'project.services.user.UserService',
+            'methods': ['profile', 'account', 'follow', 'followers'],
+
+            'config': {
+                'caching': 'none',
+                'security': 'none',
+                'recording': 'none'
+            }
+        },
+
+        'project': {
+            'enabled': True,
+            'service': 'project.services.projects.ProjectService',
+            'methods': ['projects', 'project'],
+
+            'config': {
+                'caching': 'none',
+                'security': 'none',
+                'recording': 'none'
+            }
+        },
+
+        'proposal': {
+            'enabled': True,
+            'service': 'project.services.proposal.ProposalService',
+            'methods': ['proposals', 'proposal', 'comment', 'comments'],
+
+            'config': {
+                'caching': 'none',
+                'security': 'none',
+                'recording': 'none'
+            }
         }
 
     }  # End services

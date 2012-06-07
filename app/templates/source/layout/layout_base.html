@@ -1,0 +1,30 @@
+{% extends "core/base_web.html" %}
+
+{% block header %}
+<nav role="navigation">
+	<ul class='right'>
+		{# <li class='profiletab'><a href="/me" title='Profile'>John Doe</a></li> #}
+		<li><a href="/signup" title="Sign Up">Sign Up</a></li>
+		<li><a href="/login" title="Log In">Log In</a></li>
+	</ul>
+</nav>
+{% endblock %}
+
+{% block main %}
+{% endblock main %}
+
+{% block footer %}
+    <div id='footer-content'>
+    {% block footerleft  %}
+		<div class='left'>
+	        BETA - work in progress
+	    </div>
+    {% endblock footerleft %}
+
+    {% block footerright %}
+		<div class='right'>
+	        copyright (c) 2012, openfire
+	    </div>
+    {% endblock footerright %}
+    </div>
+{% endblock footer %}
