@@ -33,7 +33,7 @@ class ProposalController extends OpenfireController
 
 
 
-@__openfire_preinit.abstract_base_classes.push(Project)
-@__openfire_preinit.abstract_base_classes.push(Proposal)
+@__openfire_preinit.abstract_base_objects.push(Project)
+@__openfire_preinit.abstract_base_objects.push(Proposal)
 @__openfire_preinit.abstract_base_controllers.push(ProjectController)
 @__openfire_preinit.abstract_base_controllers.push(ProposalController)

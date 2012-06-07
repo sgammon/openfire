@@ -1,6 +1,7 @@
 ## openfire bbq controllers
 class BBQController extends OpenfireController
 
+    @export = 'private'
     @events = []
 
     constructor: (openfire, window) ->

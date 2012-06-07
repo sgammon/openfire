@@ -98,5 +98,6 @@ if $?
 
 # otherwise, we got this on lock.
 else
-    window.$ = (id) -> window.Util?.get?(id) or document.getElementById(id)
+
+    window.$ = (id) -> if window.Util? then window.Util.get(id) else document.getElementById(id)
     window.$.openfire = window.openfire
