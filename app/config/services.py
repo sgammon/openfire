@@ -102,7 +102,7 @@ config['apptools.project.services'] = {
         'user': {
             'enabled': True,
             'service': 'openfire.services.user.UserService',
-            'methods': ['profile', 'account', 'follow', 'followers', 'follow', 'followers'],
+            'methods': ['profile', 'account', 'follow', 'followers'],
 
             'config': {
                 'caching': 'none',
@@ -114,8 +114,8 @@ config['apptools.project.services'] = {
         ## Project API - provides structured information about openfire projects
         'project': {
             'enabled': True,
-            'service': 'openfire.services.projects.ProjectService',
-            'methods': ['get', 'list', 'put', 'comment', 'comments', 'post', 'posts', 'add_media', 'media', 'follow', 'followers', 'backers', 'back'],
+            'service': 'openfire.services.project.ProjectService',
+            'methods': ['get', 'list', 'put', 'comment', 'comments', 'post', 'posts', 'add_media', 'media', 'follow', 'followers', 'backers', 'back', 'suspend', 'shutdown'],
 
             'config': {
                 'caching': 'none',

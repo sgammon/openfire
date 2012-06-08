@@ -40,7 +40,7 @@ rules = [
         ]),
 
         ## === Project URLs === ##
-        HandlerPrefixRoute('projects.', [
+        HandlerPrefixRoute('project.', [
             Route('/projects', name='project/landing', handler='ProjectLanding'),
             Route('/project/<customurl>', name='project/home', handler='ProjectHome'),
         ]),
