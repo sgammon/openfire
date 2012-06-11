@@ -47,7 +47,7 @@ rules = [
 
         ## === BBQ URLs === ##
         HandlerPrefixRoute('bbq.', [
-            Route('/bbq', name='bbq', handler='bbq.Moderate'),
+            Route('/bbq', name='bbq', handler='Moderate'),
         ]),
 
         ## === Security URLs === ##
