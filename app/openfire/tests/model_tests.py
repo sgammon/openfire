@@ -11,6 +11,7 @@ import unittest
 from google.appengine.ext import testbed
 
 from openfire.models.project import Category
+import test_db_loader as db_loader
 
 class CategoryTestCase(unittest.TestCase):
 
@@ -22,10 +23,7 @@ class CategoryTestCase(unittest.TestCase):
     def tearDown(self):
         self.testbed.deactivate()
 
-    def testInsertEntity(self):
-        Category(
-            slug="test",
-            name="Test Category",
-            description="some txt here",
-            ).put(use_memcache=False)
-        self.assertEqual(1, len(Category.query().fetch(2)))
+    def test_insert_entity(self):
+        category_key = db_loader.create_category()
+        self.assertTrue(category_key, "Failed to create an entity and return a key.")
+        self.assertEqual(1, len(Category.query().fetch(2)), "Failed to retrieve a stored entity.")

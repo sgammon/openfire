@@ -8,6 +8,10 @@ from openfire.models.role import RoleMapping
 from openfire.models.assets import Media
 from openfire.models.social import Follow
 from openfire.models.social import Comment
+from openfire.models import MessageConverterMixin
+
+from openfire.messages.project import Project as ProjectMessage
+from openfire.messages.proposal import Proposal as ProposalMessage
 
 
 ######## ======== Top-Level Project Models ======== ########
@@ -39,6 +43,7 @@ class Category(ndb.Model):
 class Proposal(ndb.Model):
 
     ''' A proposal for a project on openfire. '''
+    _message_class = ProposalMessage
 
     # Naming/Status
     slug = ndb.StringProperty('s', indexed=True, required=True)
@@ -62,9 +67,10 @@ class Proposal(ndb.Model):
 
 
 ## Projects
-class Project(polymodel.PolyModel):
+class Project(polymodel.PolyModel, MessageConverterMixin):
 
     ''' An openfire project, also known as a `spark` :) '''
+    _message_class = ProjectMessage
 
     # Naming/Status/Ancestry
     slug = ndb.StringProperty('s', indexed=True, required=True)
@@ -86,6 +92,9 @@ class Project(polymodel.PolyModel):
     # Privacy
     public = ndb.BooleanProperty('pp', indexed=True, default=False)
     viewers = ndb.KeyProperty('pv', indexed=True, repeated=True)
+
+    def is_private(self):
+        return self.status == 'p'
 
 
 ## Contribution Goals

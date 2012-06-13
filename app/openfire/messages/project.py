@@ -12,11 +12,12 @@ class Project(messages.Message):
     summary = messages.StringField(5)
     pitch = messages.StringField(6)
     tech = messages.StringField(7)
-    keywords = messages.StringField(8)
+    keywords = messages.StringField(8, repeated=True)
     creator = messages.StringField(9)
     owners = messages.StringField(10, repeated=True)
     goals = messages.MessageField(Goal, 11, repeated=True)
     tiers = messages.MessageField(Tier, 12, repeated=True)
+    key = messages.StringField(13)
 
 
 class Projects(messages.Message):
