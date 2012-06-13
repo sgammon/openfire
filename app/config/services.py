@@ -137,6 +137,19 @@ config['apptools.project.services'] = {
             }
         },
 
+        ## Activity API - general and personal site activity.
+        'activity': {
+            'enabled': True,
+            'service': 'openfire.services.activity.ActivityService',
+            'methods': ['site_metrics', 'known_backers', 'known_followers'],
+
+            'config': {
+                'caching': 'none',
+                'security': 'none',
+                'recording': 'none'
+            }
+        },
+
         ## Realtime API - used for establishing/managing a realtime/push session
         'realtime': {
 			'enabled': False,
