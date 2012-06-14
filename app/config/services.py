@@ -111,6 +111,19 @@ config['apptools.project.services'] = {
             }
         },
 
+        ## Category API - provides structured information about openfire categories
+        'category': {
+            'enabled': True,
+            'service': 'openfire.services.category.CategoryService',
+            'methods': ['get', 'list', 'put', 'delete'],
+
+            'config': {
+                'caching': 'none',
+                'security': 'none',
+                'recording': 'none'
+            }
+        },
+
         ## Project API - provides structured information about openfire projects
         'project': {
             'enabled': True,

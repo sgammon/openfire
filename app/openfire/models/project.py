@@ -12,14 +12,16 @@ from openfire.models import MessageConverterMixin
 
 from openfire.messages.project import Project as ProjectMessage
 from openfire.messages.proposal import Proposal as ProposalMessage
+from openfire.messages.common import Category as CategoryMessage
 
 
 ######## ======== Top-Level Project Models ======== ########
 
 ## Project Categories
-class Category(ndb.Model):
+class Category(ndb.Model, MessageConverterMixin):
 
     ''' A category for projects and proposals to exist in. '''
+    _message_class = CategoryMessage
 
     # Naming/Ancestry
     slug = ndb.StringProperty('s', indexed=True, required=True)

@@ -18,7 +18,7 @@ class ProposalService(RemoteService):
     @remote.method(proposal.ProposalRequest, proposal.Proposal)
     def get(self, request):
 
-        ''' Return, create, or edit a proposal. '''
+        ''' Return a proposal. '''
 
         return proposal.Proposal()
 
@@ -26,7 +26,7 @@ class ProposalService(RemoteService):
     @remote.method(proposal.ProposalRequest, proposal.Proposal)
     def put(self, request):
 
-        ''' Return, create, or edit a proposal. '''
+        ''' Create a new or or edit an existing proposal. '''
 
         return proposal.Proposal()
 

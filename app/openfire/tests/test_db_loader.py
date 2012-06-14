@@ -7,7 +7,7 @@ This module is used to create database entities for testing purposes.
 
 def create_category(slug='test', name='Test Category', description='some txt'):
     return Category(key=ndb.Key('Category', slug), slug=slug, name=name, description=description,
-        ).put(use_memcache=False)
+        ).put()
 
 
 def create_project(slug='test', name='Test Project', status='o', public=True,
@@ -19,4 +19,4 @@ def create_project(slug='test', name='Test Project', status='o', public=True,
     return Project(key=ndb.Key('Project', slug), slug=slug, name=name, status=status, public=public,
                     summary=summary, pitch=pitch, tech=tech, keywords=keywords, proposal=proposal,
                     category=category, creator=creator
-                    ).put(use_memcache=False)
+                    ).put()

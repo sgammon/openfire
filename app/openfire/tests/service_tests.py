@@ -17,6 +17,7 @@ import json
 import copy
 
 import test_db_loader as db_loader
+from openfire.models.project import Category
 
 
 API_DICT = {
@@ -60,6 +61,10 @@ class SystemServiceTestCase(unittest.TestCase):
         self.testbed = testbed.Testbed()
         self.testbed.activate()
         self.testbed.init_datastore_v3_stub()
+        self.testbed.init_memcache_stub()
+
+    def tearDown(self):
+        self.testbed.deactivate()
 
     def test_echo_service_method(self):
         message_content = 'TESTING'
@@ -80,6 +85,10 @@ class ProjectServiceTestCase(unittest.TestCase):
         self.testbed = testbed.Testbed()
         self.testbed.activate()
         self.testbed.init_datastore_v3_stub()
+        self.testbed.init_memcache_stub()
+
+    def tearDown(self):
+        self.testbed.deactivate()
 
     def test_project_list_method(self):
         ''' Add one private and one public project to the database then query. '''
@@ -183,3 +192,91 @@ class ProjectServiceTestCase(unittest.TestCase):
         self.assertEqual(response['response']['type'], '',
             'Project  service method failed.')
     """
+
+
+class CategoryServiceTestCase(unittest.TestCase):
+    ''' Test cases for the category service.
+    '''
+
+    def setUp(self):
+        self.testbed = testbed.Testbed()
+        self.testbed.activate()
+        self.testbed.init_datastore_v3_stub()
+        self.testbed.init_memcache_stub()
+
+    def tearDown(self):
+        self.testbed.deactivate()
+
+    def test_category_list_method(self):
+
+        ''' Add a category to the database then query. '''
+
+        slug = 'test-slug'
+        db_loader.create_category(slug=slug)
+        response = generic_service_method_success_test(self, 'category', 'list')
+        self.assertEqual(response['response']['type'], 'Categories',
+            'System category list service method failed.')
+        self.assertEqual(len(response['response']['content']['categories']), 1,
+            'Failed to return the correct number of categories.')
+
+    def test_category_get_method(self):
+
+        ''' Add a category to the database then query. '''
+
+        category_slug = 'test-slug'
+        db_loader.create_category(slug=category_slug)
+        response = generic_service_method_success_test(self, 'category', 'get', params={'slug':category_slug})
+        self.assertEqual(response['response']['type'], 'Category',
+            'Category get service method failed.')
+        self.assertEqual(response['response']['content']['slug'], category_slug,
+            'Category get method returned the wrong category.')
+
+    def test_category_put_method(self):
+
+        ''' Add a category through the api and then update it. '''
+
+        slug = 'different'
+        name_1 = 'Name'
+        description_1 = 'Think.'
+        name_2 = 'Different Name'
+        description_2 = 'Think different.'
+
+        params = {
+            'slug': slug,
+            'name': name_1,
+            'description': description_1,
+        }
+
+        response = generic_service_method_success_test(self, 'category', 'put', params=params)
+        self.assertEqual(response['response']['type'], 'Category',
+            'Category put service method failed to create a new category.')
+        self.assertEqual(response['response']['content']['name'], name_1,
+            'Category put failed to set the name.')
+        self.assertEqual(response['response']['content']['description'], description_1,
+            'Category put failed to set the description.')
+
+        params['name'] = name_2
+        params['description'] = description_2
+        params['key'] = slug
+
+        response = generic_service_method_success_test(self, 'category', 'put', params=params)
+        self.assertEqual(response['response']['type'], 'Category',
+            'Category put service method failed.')
+        self.assertEqual(response['response']['content']['name'], name_2,
+            'Category put failed to change the name.')
+        self.assertEqual(response['response']['content']['description'], description_2,
+            'Category put failed to change the description.')
+
+    def test_category_delete_method(self):
+
+        ''' Add a category and then delete it through the api. '''
+
+        slug = 'test-slug'
+        db_loader.create_category(slug=slug)
+        params = {
+            'slug': slug,
+        }
+        response = generic_service_method_success_test(self, 'category', 'delete', params=params)
+        self.assertEqual(response['response']['type'], 'Echo',
+            'Category put service method failed.')
+        self.assertEqual(len(Category.query().fetch(1)), 0, 'Failed to delete category.')

@@ -34,7 +34,7 @@ class ProjectService(RemoteService):
         is_admin = True
 
         project_key = ndb.Key('Project', request.project_id)
-        project = project_key.get(use_memcache=False)
+        project = project_key.get()
 
         if not project:
             # Project not found.
