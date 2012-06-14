@@ -42,7 +42,7 @@ class Category(ndb.Model, MessageConverterMixin):
 
 
 ## Project Proposals
-class Proposal(ndb.Model):
+class Proposal(ndb.Model, MessageConverterMixin):
 
     ''' A proposal for a project on openfire. '''
     _message_class = ProposalMessage

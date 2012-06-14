@@ -6,7 +6,7 @@ from google.appengine.dist import use_library
 use_library('django', '1.2')
 
 import unittest
-from google.appengine.ext import testbed
+from google.appengine.ext import testbed, ndb
 
 import bootstrap
 bootstrap.AppBootstrapper.prepareImports()
@@ -102,23 +102,50 @@ class ProjectServiceTestCase(unittest.TestCase):
 
     def test_project_get_method(self):
         ''' Add one private and one public project to the database then query. '''
-        project_id = 'test-1'
-        db_loader.create_project(slug=project_id)
-        response = generic_service_method_success_test(self, 'project', 'get', params={'project_id':project_id})
+        slug = 'test-1'
+        db_loader.create_project(slug=slug)
+        response = generic_service_method_success_test(self, 'project', 'get', params={'slug':slug})
         self.assertEqual(response['response']['type'], 'Project',
             'Project get service method failed.')
-        self.assertEqual(response['response']['content']['slug'], project_id,
+        self.assertEqual(response['response']['content']['slug'], slug,
             'Project get method returned the wrong project.')
+
+    def test_project_put_method(self):
+
+        ''' Add a project (not through api) and then update it. '''
+
+        slug = 'savetheeverything'
+        proposalKey = ndb.Key('Proposal', 'fake')
+        categoryKey = ndb.Key('Category', slug)
+        creatorKey = ndb.Key('User', 'fakie')
+        name_1 = 'Save the Everything!'
+        pitch_1 = 'Save all the animals!'
+        name_2 = 'Save everything!!'
+        pitch_2 = 'Yeah, save all those things.'
+
+        db_loader.create_project(slug=slug, name=name_1, pitch=pitch_1,
+                    proposal=proposalKey, category=categoryKey, creator=creatorKey)
+
+        params = {
+            'key': slug,
+            'slug': slug,
+            'name': name_2,
+            'pitch': pitch_2,
+        }
+
+        response = generic_service_method_success_test(self, 'project', 'put', params=params)
+        self.assertEqual(response['response']['type'], 'Project',
+            'Project put service method failed.')
+        self.assertEqual(response['response']['content']['name'], name_2,
+            'Project put failed to change the name.')
+        self.assertEqual(response['response']['content']['pitch'], pitch_2,
+            'Project put failed to change the description.')
+
+
 
     """
     " We will fill in these tests as the service methods are implemented.
     "
-
-    def test_project_put_method(self):
-        ''' Test something. '''
-        response = generic_service_method_success_test(self, 'project', 'put', params={})
-        self.assertEqual(response['response']['type'], '',
-            'Project  service method failed.')
 
     def test_project_comment_method(self):
         ''' Test something. '''
@@ -192,6 +219,78 @@ class ProjectServiceTestCase(unittest.TestCase):
         self.assertEqual(response['response']['type'], '',
             'Project  service method failed.')
     """
+
+
+class ProposalServiceTestCase(unittest.TestCase):
+    ''' Test cases for the proposal service.
+    '''
+
+    def setUp(self):
+        self.testbed = testbed.Testbed()
+        self.testbed.activate()
+        self.testbed.init_datastore_v3_stub()
+        self.testbed.init_memcache_stub()
+
+    def tearDown(self):
+        self.testbed.deactivate()
+
+    def test_proposal_list_method(self):
+        ''' Add a proposal to the database then query. '''
+        db_loader.create_proposal(slug='test-1')
+        response = generic_service_method_success_test(self, 'proposal', 'list')
+        self.assertEqual(response['response']['type'], 'Proposals',
+            'System proposal list service method failed.')
+        self.assertEqual(len(response['response']['content']['proposals']), 1,
+            'Failed to return the correct number of proposals.')
+
+    def test_proposal_get_method(self):
+        ''' Add one private and one public proposal to the database then query. '''
+        slug = 'test-1'
+        db_loader.create_proposal(slug=slug)
+        response = generic_service_method_success_test(self, 'proposal', 'get', params={'slug':slug})
+        self.assertEqual(response['response']['type'], 'Proposal',
+            'Proposal get service method failed.')
+        self.assertEqual(response['response']['content']['slug'], slug,
+            'Proposal get method returned the wrong proposal.')
+
+
+    def test_proposal_put_method(self):
+
+        ''' Add a proposal through the api and then update it. '''
+
+        slug = 'savetheeverything'
+        name_1 = 'Save the Everything!'
+        pitch_1 = 'Save all the animals!'
+        name_2 = 'Save everything!!'
+        pitch_2 = 'Yeah, save all those things.'
+
+        params = {
+            'slug': slug,
+            'name': name_1,
+            'pitch': pitch_1,
+            'category': ndb.Key('Category', slug).urlsafe(),
+            'creator': ndb.Key('User', 'fakie').urlsafe(),
+        }
+
+        response = generic_service_method_success_test(self, 'proposal', 'put', params=params)
+        self.assertEqual(response['response']['type'], 'Proposal',
+            'Proposal put service method failed to create a new proposal.')
+        self.assertEqual(response['response']['content']['name'], name_1,
+            'Proposal put failed to set the name.')
+        self.assertEqual(response['response']['content']['pitch'], pitch_1,
+            'Proposal put failed to set the description.')
+
+        params['name'] = name_2
+        params['pitch'] = pitch_2
+        params['key'] = slug
+
+        response = generic_service_method_success_test(self, 'proposal', 'put', params=params)
+        self.assertEqual(response['response']['type'], 'Proposal',
+            'Proposal put service method failed.')
+        self.assertEqual(response['response']['content']['name'], name_2,
+            'Proposal put failed to change the name.')
+        self.assertEqual(response['response']['content']['pitch'], pitch_2,
+            'Proposal put failed to change the description.')
 
 
 class CategoryServiceTestCase(unittest.TestCase):

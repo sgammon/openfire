@@ -71,7 +71,7 @@ class MessageConverterMixin(ModelMixin):
         for k in [f.name for f in message.all_fields()]:
             if k == 'key':
                 continue
-            if hasattr(self, k):
+            if hasattr(self, k) and getattr(message, k):
                 try:
                     setattr(self, str(k), getattr(message, k))
                 except TypeError:
@@ -81,7 +81,13 @@ class MessageConverterMixin(ModelMixin):
                         except TypeError:
                             continue
 
-                else:
+                except:
                     # TODO: Handle other errors here?
+                    try:
+                        key = ndb.key.Key(urlsafe=getattr(message, k))
+                        setattr(self, str(k), key)
+                    except TypeError:
+                        continue
+                else:
                     continue
         return self
